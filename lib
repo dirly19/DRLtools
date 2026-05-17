@@ -1,74 +1,122 @@
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const drltools());
-}
-
-class drltools extends StatelessWidget {
-  const drltools({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'drltools',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(useMaterial3: true).copyWith(
-        scaffoldBackgroundColor: const Color(0xFF0A0E13),
-        cardColor: const Color(0xFF151A20),
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF00E5FF), // ganti warna utama di sini
-          secondary: Color(0xFF00E5FF),
-        ),
-      ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late TabController _tabController;
-  int _currentIndex = 0;
-
-  // contoh state, ganti sesuai kebutuhan lu
-  bool featureEnabled = false;
-  double sliderValue = 50.0;
-  Color selectedColor = Colors.red;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Header - ganti nama app lu di sini
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  const Icon(Icons.flash_on, color: Color(0xFF00E5FF), size: 32),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('MY TOOLS', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                      Text('v1.0.0', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                    ],
+Widget _buildGameConsoleTab() {
+  return SingleChildScrollView(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      children: [
+        // Header Card
+        Card(
+          color: const Color(0xFF1A1F26),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                const Icon(Icons.sports_esports, color: Color(0xFF00E5FF), size: 32),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('FreeFire', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text('Game Console', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  ],
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: const Color(0x
+                  child: const Text('RUNNING', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                )
+              ],
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // Aim Assist
+        _buildToggleCard(
+          title: 'Aim Assist',
+          subtitle: 'Bantu ngarahin aim pas deket musuh',
+          value: aimAssist,
+          onChanged: (v) => setState(() => aimAssist = v),
+        ),
+
+        // ROG Monitor
+        _buildToggleCard(
+          title: 'ROG Monitor',
+          subtitle: 'Tampilin info CPU, GPU, FPS, Suhu',
+          value: rogMonitor,
+          onChanged: (v) => setState(() => rogMonitor = v),
+        ),
+
+        // FPS Optimaze
+        _buildToggleCard(
+          title: 'FPS Optimaze',
+          subtitle: 'Optimasi biar FPS lebih stabil',
+          value: fpsOptimaze,
+          onChanged: (v) => setState(() => fpsOptimaze = v),
+        ),
+
+        // Sensi Optimaze
+        _buildToggleCard(
+          title: 'Sensi Optimaze',
+          subtitle: 'Optimasi sensitivitas biar responsif',
+          value: sensiOptimaze,
+          onChanged: (v) => setState(() => sensiOptimaze = v),
+        ),
+
+        // Cache Plus Mode
+        _buildToggleCard(
+          title: 'Cache Plus Mode',
+          subtitle: 'Bersihin cache biar game lebih ringan',
+          value: cachePlus,
+          onChanged: (v) => setState(() => cachePlus = v),
+        ),
+
+        const SizedBox(height: 20),
+
+        // Launch Game Button
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              // TODO: panggil method buat launch game
+              print('Launch FreeFire');
+            },
+            icon: const Icon(Icons.play_arrow),
+            label: const Text('LAUNCH GAME', style: TextStyle(fontWeight: FontWeight.bold)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF00E5FF),
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+// Helper widget biar ga ngulang kode
+Widget _buildToggleCard({
+  required String title,
+  required String subtitle,
+  required bool value,
+  required ValueChanged<bool> onChanged,
+}) {
+  return Card(
+    margin: const EdgeInsets.only(bottom: 12),
+    child: ListTile(
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+      subtitle: Text(subtitle, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+      trailing: Switch(
+        value: value,
+        onChanged: onChanged,
+        activeColor: const Color(0xFF00E5FF),
+      ),
+    ),
+  );
+}
