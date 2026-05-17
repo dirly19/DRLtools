@@ -48,3 +48,4 @@ android/            # Android platform code
 ios/                # iOS platform code
 pubspec.yaml        # Dependencies & metadata
 ```
+
