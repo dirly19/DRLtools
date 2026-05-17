@@ -1,19 +1,28 @@
 name: Build APK
+
 on:
   push:
     branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.0'
-    - run: flutter pub get
-    - run: flutter create --project-name drl_tools --overwrite .
-    - run: flutter build apk --release
-    - uses: actions/upload-artifact@v4
+        flutter-version: '3.29.0'
+        channel: 'stable'
+    
+    - name: Flutter pub get
+      run: flutter pub get
+    
+    - name: Build APK Release
+      run: flutter build apk --release
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
       with:
         name: release-apk
         path: build/app/outputs/flutter-apk/app-release.apk
