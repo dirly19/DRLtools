@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyToolsApp());
+}
+
+class MyToolsApp extends StatelessWidget {
+  const MyToolsApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Tools',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(useMaterial3: true).copyWith(
+        scaffoldBackgroundColor: const Color(0xFF0A0E13),
+        cardColor: const Color(0xFF151A20),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFF00E5FF), // ganti warna utama di sini
+          secondary: Color(0xFF00E5FF),
+        ),
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late TabController _tabController;
+  int _currentIndex = 0;
+
+  // contoh state, ganti sesuai kebutuhan lu
+  bool featureEnabled = false;
+  double sliderValue = 50.0;
+  Color selectedColor = Colors.red;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Header - ganti nama app lu di sini
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  const Icon(Icons.flash_on, color: Color(0xFF00E5FF), size: 32),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('MY TOOLS', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text('v1.0.0', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    ],
+                  ),
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0x
