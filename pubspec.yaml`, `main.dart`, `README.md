@@ -1,0 +1,15 @@
+   name: drltools
+   description: FF Tools by DRL
+   publish_to: 'none'
+
+   environment:
+     sdk: ">=3.0.0 <4.0.0"
+
+   dependencies:
+     flutter:
+       sdk: flutter
+
+   flutter:
+     uses-material-design: true
+     assets:
+       - assets/drl_logo.png
