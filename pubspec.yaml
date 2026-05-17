@@ -1,15 +1,29 @@
-   name: drltools
-   description: FF Tools by DRL
-   publish_to: 'none'
+name: flutter_app
+description: "A new Flutter project."
+publish_to: 'none'
 
-   environment:
-     sdk: ">=3.0.0 <4.0.0"
+version: 1.0.0+1
 
-   dependencies:
-     flutter:
-       sdk: flutter
+environment:
+  sdk: '>=3.3.0 <4.0.0'
 
-   flutter:
-     uses-material-design: true
-     assets:
-       - assets/drl_logo.png
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  go_router: ^14.0.0
+  provider: ^6.1.2
+  shared_preferences: ^2.2.3
+  http: ^1.2.1
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.3.1
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
