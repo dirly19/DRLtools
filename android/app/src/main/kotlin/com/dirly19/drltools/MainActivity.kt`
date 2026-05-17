@@ -1,5 +1,0 @@
-package com.dirly19.drltools
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity()
